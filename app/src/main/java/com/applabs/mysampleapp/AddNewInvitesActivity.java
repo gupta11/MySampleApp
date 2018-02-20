@@ -20,7 +20,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class AddNewInvitesActivity extends AppCompatActivity {
-
     EditText etEmailsEntry, etMessage;
     Button sendInvite;
     int emailedCount = 0;
@@ -32,46 +31,40 @@ public class AddNewInvitesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_invites);
-
         progress = (ProgressBar) findViewById(R.id.progress);
         etEmailsEntry = (EditText) findViewById(R.id.etEmailsEntry);
         etMessage = (EditText) findViewById(R.id.etMesssage);
         sendInvite = (Button) findViewById(R.id.btnSendInvites);
         mFirebaseDatabase = FirebaseDatabase.getInstance().getReference("").child("invites");
+
         sendInvite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (TextUtils.isEmpty(etEmailsEntry.getText().toString()))
-                    Toast.makeText(AddNewInvitesActivity.this, R.string.error_empty_email, Toast.LENGTH_SHORT).show();
+            if (TextUtils.isEmpty(etEmailsEntry.getText().toString()))
+                Toast.makeText(AddNewInvitesActivity.this, R.string.error_empty_email, Toast.LENGTH_SHORT).show();
+            else if (TextUtils.isEmpty(etMessage.getText().toString()))
+                Toast.makeText(AddNewInvitesActivity.this, R.string.error_empty_message, Toast.LENGTH_SHORT).show();
+            else {
+                emails = etEmailsEntry.getText().toString().split(",");
+                emailedCount = emails.length;
+                progress.setVisibility(View.VISIBLE);
+                for (int i = 0; i < emails.length; i++) {
+                    Invites invites = new Invites();
+                    invites.setSenderEmail(UserHelper.getUserEmail());
+                    invites.setReceiverEmail(emails[i]);
+                    invites.setAllow(true);
+                    invites.setInviteMessage(etMessage.getText().toString());
 
-                else if (TextUtils.isEmpty(etMessage.getText().toString()))
-                    Toast.makeText(AddNewInvitesActivity.this, R.string.error_empty_message, Toast.LENGTH_SHORT).show();
-
-                else {
-                    emails = etEmailsEntry.getText().toString().split(",");
-                    emailedCount = emails.length;
-                    progress.setVisibility(View.VISIBLE);
-                    for (int i = 0; i < emails.length; i++) {
-                        Invites invites = new Invites();
-                        invites.setSenderEmail(UserHelper.getUserEmail());
-                        invites.setReceiverEmail(emails[i]);
-                        invites.setAllow(true);
-                        invites.setInviteMessage(etMessage.getText().toString());
-
-                        String inviteId = mFirebaseDatabase.push().getKey();
-                        // pushing user to 'users' node using the userId
-                        mFirebaseDatabase.child(inviteId).setValue(invites).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                checkCompletion();
-                            }
-                        });
-
-
-                    }
-
-
+                    String inviteId = mFirebaseDatabase.push().getKey();
+                    // pushing user to 'users' node using the userId
+                    mFirebaseDatabase.child(inviteId).setValue(invites).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            checkCompletion();
+                        }
+                    });
                 }
+            }
             }
         });
     }
@@ -106,7 +99,6 @@ public class AddNewInvitesActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 100){
-
             setResult(RESULT_OK);
             finish();
         }

@@ -29,5 +29,5 @@
     <string name="error_empty_message">Invite message can not be empty</string>
     <string name="txt_allow_done">Allow permission granted</string>
     <string name="txt_block_done">User is block for this invite</string>
-    <string name="txt_email_sub">have added you on my sample app, come check out my Bio</string>
+    <string name="txt_email_sub">I have added you on my sample app, come check out my Bio</string>
 </resources>

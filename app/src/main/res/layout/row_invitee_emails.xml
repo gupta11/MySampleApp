@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/margin_5"
-        android:text="text@abc.com"
+        android:text=""
         android:textColor="@android:color/black"
         android:textSize="@dimen/textsize_16"
         android:textStyle="bold" />
@@ -20,7 +20,7 @@
         android:id="@+id/tvMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="text@abc.com"
+        android:text=""
         android:textColor="@android:color/black"
         android:textSize="@dimen/textsize_16"
          />

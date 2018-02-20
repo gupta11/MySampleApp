@@ -88,8 +88,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-
-
     UserLoginTask mAuthTask;
 
     private void attemptLogin() {
@@ -174,9 +172,6 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
             });
-
-
-
         }
     }
 

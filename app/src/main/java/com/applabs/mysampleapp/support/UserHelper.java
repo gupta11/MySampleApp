@@ -32,8 +32,6 @@ public class UserHelper {
         SharedPreferencesHelper.getInstance().setString(PREF_USER_EMAIL, emailId);
     }
 
-
-
     public static String getID() {
         return SharedPreferencesHelper.getInstance().getString(PREF_ID, "");
     }
