@@ -1,5 +1,6 @@
 package com.applabs.mysampleapp;
 
+import android.content.Intent;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -23,6 +24,7 @@ import android.widget.TextView;
 import com.applabs.mysampleapp.adapter.SectionsPagerAdapter;
 import com.applabs.mysampleapp.fragment.InvitedFragment;
 import com.applabs.mysampleapp.fragment.InviteeFragment;
+import com.applabs.mysampleapp.support.UserHelper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,4 +53,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void onLogoutClick(View view) {
+        UserHelper.setUserEmail("");
+        UserHelper.setID("");
+        UserHelper.setPrefUserBio("");
+        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+        this.finish();
+    }
 }

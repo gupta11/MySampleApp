@@ -11,7 +11,7 @@
 
 
     <ProgressBar
-        android:id="@+id/progres"
+        android:id="@+id/progress"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,17 +20,17 @@
         android:visibility="gone" />
 
     <EditText
-        android:id="@+id/edEmailsEntry"
+        android:id="@+id/etEmailsEntry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/txt_email_entry"
         android:minHeight="@dimen/margin_100" />
 
     <EditText
-        android:id="@+id/edMesssage"
+        android:id="@+id/etMesssage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edEmailsEntry"
+        android:layout_below="@id/etEmailsEntry"
         android:hint="@string/txt_invite_message" />
 
     <Button
@@ -38,7 +38,7 @@
         style="?android:textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edMesssage"
+        android:layout_below="@id/etMesssage"
         android:layout_marginTop="16dp"
         android:text="@string/txt_send"
         android:textStyle="bold" />

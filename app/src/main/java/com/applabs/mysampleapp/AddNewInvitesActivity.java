@@ -13,7 +13,6 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.applabs.mysampleapp.model.Invites;
-import com.applabs.mysampleapp.model.User;
 import com.applabs.mysampleapp.support.UserHelper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -22,11 +21,11 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class AddNewInvitesActivity extends AppCompatActivity {
 
-    EditText edEmailsEntry, edMessage;
+    EditText etEmailsEntry, etMessage;
     Button sendInvite;
-    int emaildCount = 0;
+    int emailedCount = 0;
     private DatabaseReference mFirebaseDatabase;
-    ProgressBar progres;
+    ProgressBar progress;
     String[] emails;
 
     @Override
@@ -34,30 +33,30 @@ public class AddNewInvitesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_invites);
 
-        progres = (ProgressBar) findViewById(R.id.progres);
-        edEmailsEntry = (EditText) findViewById(R.id.edEmailsEntry);
-        edMessage = (EditText) findViewById(R.id.edMesssage);
+        progress = (ProgressBar) findViewById(R.id.progress);
+        etEmailsEntry = (EditText) findViewById(R.id.etEmailsEntry);
+        etMessage = (EditText) findViewById(R.id.etMesssage);
         sendInvite = (Button) findViewById(R.id.btnSendInvites);
         mFirebaseDatabase = FirebaseDatabase.getInstance().getReference("").child("invites");
         sendInvite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (TextUtils.isEmpty(edEmailsEntry.getText().toString()))
+                if (TextUtils.isEmpty(etEmailsEntry.getText().toString()))
                     Toast.makeText(AddNewInvitesActivity.this, R.string.error_empty_email, Toast.LENGTH_SHORT).show();
 
-                else if (TextUtils.isEmpty(edMessage.getText().toString()))
+                else if (TextUtils.isEmpty(etMessage.getText().toString()))
                     Toast.makeText(AddNewInvitesActivity.this, R.string.error_empty_message, Toast.LENGTH_SHORT).show();
 
                 else {
-                    emails = edEmailsEntry.getText().toString().split(",");
-                    emaildCount = emails.length;
-                    progres.setVisibility(View.VISIBLE);
+                    emails = etEmailsEntry.getText().toString().split(",");
+                    emailedCount = emails.length;
+                    progress.setVisibility(View.VISIBLE);
                     for (int i = 0; i < emails.length; i++) {
                         Invites invites = new Invites();
                         invites.setSenderEmail(UserHelper.getUserEmail());
                         invites.setReceiverEmail(emails[i]);
                         invites.setAllow(true);
-                        invites.setInviteMessage(edMessage.getText().toString());
+                        invites.setInviteMessage(etMessage.getText().toString());
 
                         String inviteId = mFirebaseDatabase.push().getKey();
                         // pushing user to 'users' node using the userId
@@ -82,11 +81,11 @@ public class AddNewInvitesActivity extends AppCompatActivity {
     private void checkCompletion() {
         addCompleteCount++;
 
-        if (emaildCount == addCompleteCount) {
+        if (emailedCount == addCompleteCount) {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    progres.setVisibility(View.GONE);
+                    progress.setVisibility(View.GONE);
                 }
             });
 
@@ -100,10 +99,6 @@ public class AddNewInvitesActivity extends AppCompatActivity {
             }catch(ActivityNotFoundException e){
 
             }
-
-
-
-
         }
     }
 
