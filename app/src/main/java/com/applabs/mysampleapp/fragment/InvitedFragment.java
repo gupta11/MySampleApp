@@ -58,7 +58,7 @@ public class InvitedFragment extends Fragment {
 
     ArrayList<Invites> invites = new ArrayList<>();
     private void refreshListView() {
-
+        invites = new ArrayList<>();
         mFirebaseDatabase.orderByChild("receiverEmail").equalTo(UserHelper.getUserEmail()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

@@ -63,11 +63,29 @@ public class MainActivity extends AppCompatActivity {
         // We will open the Invitees section regardless when the user logs in.
     }
 
-    public void onLogoutClick(View view) {
+    public void onLogoutClick() {
         UserHelper.setUserEmail("");
         UserHelper.setID("");
         UserHelper.setPrefUserBio("");
         startActivity(new Intent(MainActivity.this, LoginActivity.class));
         this.finish();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(item.getItemId()==R.id.action_logout){
+            onLogoutClick();
+        }
+        else if(item.getItemId() == R.id.action_profile){
+            startActivity(new Intent(this, ProfileActivity.class));
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

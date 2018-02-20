@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.applabs.mysampleapp.LoginActivity;
 import com.applabs.mysampleapp.MainActivity;
@@ -54,41 +56,41 @@ public class InviteAdapter extends RecyclerView.Adapter<InviteAdapter.MyViewHold
 
         Invites invites = invitesArrayList.get(position);
 
-        if(actionCallback == null)
+        if (actionCallback == null)
             holder.tvEmail.setText(invites.getSenderEmail());
         else
             holder.tvEmail.setText(invites.getReceiverEmail());
-        holder.tvMsg.setText(invites.getInviteMessage());
 
-        if(actionCallback != null) {
+        if (actionCallback != null) {
 
-            holder.tvAllow.setTextColor(ContextCompat.getColor(mContext, android.R.color.black));
-            holder.tvAllow.setTextColor(ContextCompat.getColor(mContext, android.R.color.black));
-            if (!invites.isAllow())
-                holder.tvAllow.setTextColor(ContextCompat.getColor(mContext, android.R.color.holo_green_light));
-            else
-                holder.tvBlock.setTextColor(ContextCompat.getColor(mContext, android.R.color.holo_red_light));
+            holder.tvAllow.setTextColor(ContextCompat.getColor(mContext, android.R.color.holo_green_light));
+            holder.tvBlock.setTextColor(ContextCompat.getColor(mContext, android.R.color.holo_red_light));
+            if (invites.isAllow()) {
+                holder.tvBlock.setVisibility(View.VISIBLE);
+                holder.tvAllow.setVisibility(View.GONE);
+            } else {
+                holder.tvBlock.setVisibility(View.GONE);
+                holder.tvAllow.setVisibility(View.VISIBLE);
+            }
         }
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public TextView tvEmail, tvBlock, tvAllow, tvMsg;
+        public TextView tvEmail, tvBlock, tvAllow;
 
 
         public MyViewHolder(View view) {
             super(view);
             tvEmail = (TextView) view.findViewById(R.id.tvEmail);
             tvBlock = (TextView) view.findViewById(R.id.tvBlock);
-            tvMsg = (TextView) view.findViewById(R.id.tvMessage);
             tvAllow = (TextView) view.findViewById(R.id.tvAllow);
 
             itemView.setOnClickListener(this);
-            if(actionCallback != null) {
+            if (actionCallback != null) {
                 tvBlock.setOnClickListener(this);
                 tvAllow.setOnClickListener(this);
-            }
-            else{
+            } else {
                 tvBlock.setVisibility(View.GONE);
                 tvAllow.setVisibility(View.GONE);
             }
@@ -96,35 +98,33 @@ public class InviteAdapter extends RecyclerView.Adapter<InviteAdapter.MyViewHold
 
         @Override
         public void onClick(View view) {
-            if(view == tvAllow)
+            if (view == tvAllow)
                 actionCallback.isAllowClicked(getLayoutPosition());
 
-            else if(view == tvBlock)
+            else if (view == tvBlock)
                 actionCallback.isBlockClicked(getLayoutPosition());
 
-            else{
+            else {
 
                 //enable block once bio integrate
-                /*
-                String email = "";
-                if(actionCallback == null)
-                    email = invitesArrayList.get(getLayoutPosition()).getSenderEmail();
-                else
-                    email = invitesArrayList.get(getLayoutPosition()).getReceiverEmail();
 
+                String email = "";
+                email = invitesArrayList.get(getLayoutPosition()).getSenderEmail();
                 mFirebaseDatabase.child("users").orderByChild("email").equalTo(email).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         User userData = null;
                         String key = "";
-                        for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            key= snapshot.getKey();
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            key = snapshot.getKey();
                             userData = snapshot.getValue(User.class);
+
                             break;
                         }
 
-                        if(userData != null){
-                            //show user data and toast anything
+                        if (userData != null) {
+                            if (!TextUtils.isEmpty(userData.getBio()))
+                                Toast.makeText(mContext, TextUtils.isEmpty(userData.getBio()) ? "" : userData.getBio(), Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -133,7 +133,7 @@ public class InviteAdapter extends RecyclerView.Adapter<InviteAdapter.MyViewHold
 
                     }
                 });
-                */
+
             }
 
         }

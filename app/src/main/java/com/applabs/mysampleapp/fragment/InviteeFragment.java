@@ -74,6 +74,7 @@ public class InviteeFragment extends Fragment {
 
     private void refreshListView() {
 
+        invites = new ArrayList<>();
         mFirebaseDatabase.orderByChild("senderEmail").equalTo(UserHelper.getUserEmail()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -94,6 +95,9 @@ public class InviteeFragment extends Fragment {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     Toast.makeText(getActivity(), R.string.txt_allow_done, Toast.LENGTH_SHORT).show();
+                                    Invites inv1 = invites.get(postion);
+                                    inv1.setAllow(true);
+                                    invites.set(postion, inv1);
                                     inviteAdapter.notifyDataSetChanged();
                                 }
                             });
@@ -105,7 +109,12 @@ public class InviteeFragment extends Fragment {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     Toast.makeText(getActivity(), R.string.txt_block_done, Toast.LENGTH_SHORT).show();
-                                    inviteAdapter.notifyDataSetChanged();
+//                                    Invites inv1 = invites.get(postion);
+//                                    inv1.setAllow(false);
+//                                    invites.set(postion, inv1);
+
+                                    invites.remove(postion);
+                                    inviteAdapter.notifyItemRemoved(postion);
                                 }
                             });
                         }
