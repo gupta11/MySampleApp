@@ -7,8 +7,8 @@
         android:id="@+id/recycleview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="true"
-        android:paddingBottom="@dimen/margin_10"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/margin_100"
         android:paddingTop="@dimen/margin_10" />
 
     <android.support.design.widget.FloatingActionButton
