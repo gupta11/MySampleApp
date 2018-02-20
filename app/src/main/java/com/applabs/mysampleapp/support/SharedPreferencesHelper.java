@@ -16,7 +16,7 @@ public class SharedPreferencesHelper {
     private SharedPreferences.Editor editor;
 
     private SharedPreferencesHelper() {
-        settings = MainApplicationClass.getmContext().getSharedPreferences(APPNAME, Context.MODE_PRIVATE);
+        settings = MainApplicationClass.getContext().getSharedPreferences(APPNAME, Context.MODE_PRIVATE);
         editor = settings.edit();
     }
 

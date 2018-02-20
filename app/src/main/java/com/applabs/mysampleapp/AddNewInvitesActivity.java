@@ -86,7 +86,7 @@ public class AddNewInvitesActivity extends AppCompatActivity {
             emailLauncher.setType("message/rfc822");
             emailLauncher.putExtra(Intent.EXTRA_EMAIL, emails);
             emailLauncher.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.txt_email_sub));
-            emailLauncher.putExtra(Intent.EXTRA_TEXT, "hey check this message body!"); //TODO: Add deeplink
+            emailLauncher.putExtra(Intent.EXTRA_TEXT, "http://www.mysampleapp.com?source=invited");
             try{
                 startActivityForResult(emailLauncher, 100);
             }catch(ActivityNotFoundException e){

@@ -11,14 +11,13 @@ public class MainApplicationClass extends Application {
         mContext = getApplicationContext();
     }
 
-    public static final String STORAGE_PATH_UPLOADS = "users";
-    public static Context getmContext() {
+    public static Context getContext() {
         return mContext;
     }
 
-    public static void setmContext(Context mContext) {
+    public static void setContext(Context mContext) {
         MainApplicationClass.mContext = mContext;
     }
 
-    public static Context mContext;
+    private static Context mContext;
 }

@@ -1,6 +1,7 @@
 package com.applabs.mysampleapp;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -13,6 +14,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -50,6 +52,15 @@ public class MainActivity extends AppCompatActivity {
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+    }
+
+    public void onStart(){
+        super.onStart();
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        Uri data = intent.getData();
+        //NOTE: We are not doing anything with the deeplinks here because its not really required.
+        // We will open the Invitees section regardless when the user logs in.
     }
 
     public void onLogoutClick(View view) {
