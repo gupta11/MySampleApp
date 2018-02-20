@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/margin_10"
+    android:layout_marginRight="@dimen/margin_10"
+    android:orientation="vertical"
+    tools:context="com.applabs.mysampleapp.AddNewInvitesActivity">
+
+
+    <ProgressBar
+        android:id="@+id/progres"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone" />
+
+    <EditText
+        android:id="@+id/edEmailsEntry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/txt_email_entry"
+        android:minHeight="@dimen/margin_100" />
+
+    <EditText
+        android:id="@+id/edMesssage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edEmailsEntry"
+        android:hint="@string/txt_invite_message" />
+
+    <Button
+        android:id="@+id/btnSendInvites"
+        style="?android:textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edMesssage"
+        android:layout_marginTop="16dp"
+        android:text="@string/txt_send"
+        android:textStyle="bold" />
+</RelativeLayout>
+

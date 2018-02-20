@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/margin_16"
+    android:paddingRight="@dimen/textsize_16">
+
+    <TextView
+        android:id="@+id/tvEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/margin_5"
+        android:text="text@abc.com"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/textsize_16"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_below="@id/tvEmail"
+        android:id="@+id/tvMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="text@abc.com"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/textsize_16"
+         />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvMessage"
+        android:layout_marginBottom="@dimen/margin_5"
+        android:layout_marginTop="@dimen/margin_10"
+        android:gravity="right"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvBlock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="@dimen/margin_5"
+            android:text="@string/txt_block"
+            android:textAllCaps="true" />
+
+        <TextView
+            android:id="@+id/tvAllow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:paddingLeft="@dimen/margin_5"
+            android:paddingRight="@dimen/margin_5"
+            android:text="@string/txt_allow"
+            android:textAllCaps="true" />
+
+    </LinearLayout>
+</RelativeLayout>
